@@ -1,0 +1,56 @@
+Overview:
+    The program's goal is to read in a user inputted article and create a summary. Along with summary, it analyzes a set
+    of tweets to find tweets that are relevant to the article and then create a timeline of changing sentiments related
+    to the topic of the article.
+
+Implementation:
+    Summarizer
+        - We created a dictionary of words and their corresponding counts using stemming, removing stop-words
+            and NGramWordAnalyzer
+        - Using this dictionary we scored each sentence by adding the word counts for each word that was present in the
+            sentence
+        - We determined which sentences would be displayed in the summary by finding the average score for a sentence in
+            the document and only using the sentences that had a higher score than the average
+
+    Finding Relevant Tweets:
+        - We determined if a tweet was relevant if it had the any of the words the were also in the top 3 highest counts
+            from the word dictionary generated from the article. We only looked from at least one match because tweets
+            very short so couldn't make the restrictions too tight in fear of loosing relevant tweets
+
+    Sentiment Analysis on Tweets:
+        - Using a compiled list of positive and negative words, we created a score for the tweet by checking if the words
+            in the tweet were on either of the lists and subtracting or adding to the score. We weighted each of the
+            sentiment words equally and did not normalize the weight based on length of tweet
+
+Setup:
+    We use the MeTA toolkit in this project for text analysis
+    ```bash
+    # Ensure your pip is up to date
+    pip install --upgrade pip
+
+    # install metapy
+    pip install metapy pytoml
+    ```
+
+To Run:
+    ```bash
+    # to run the program
+    # the argument into the function must be a file with the text of the article - testcase has already been provided
+    # the twitter dataset provided is just a sample of small selection of tweet from June, 2009
+    python3 sum_creator.py test_article.txt
+    ```
+
+Test-Case To Run:
+    run with given test_article.txt file to find 3 tweets about the iphone 3G launch and their sentiments
+
+Output:
+    Two files will be create, article_summary.txt and relevant_tweets.txt.
+    article_summary.txt will contain a summary of the article in bullet points and the
+    relevant_tweets.txt will contain the list of relevant tweets in the format [sentiment score, date
+    of tweet creation, tweet text].
+
+Group Member Contributions:
+    renukan2 - created the summarizer for the article
+    yashnak2 - create the sentiment and relevance analysis for the tweets
+
+
