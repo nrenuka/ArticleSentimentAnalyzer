@@ -131,7 +131,7 @@ def filter_tweets(token_tw, token_art):
     for word in token_art:
         if new_score != word[1]:
             count += 1
-        if count >= 3:
+        if count > 1:
             break
         top_words.append(word[0])
 
